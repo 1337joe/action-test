@@ -16,4 +16,4 @@ jobs:
 
       - uses: leafo/gh-actions-luarocks@v4
 
-      - run: echo "upload rockspecs/du-mocks-${GITHUB_REF##*/}-1.rockspec --api-key ${{ secrets.API_KEY }}"
+      - run: echo "upload rockspecs/du-mocks-${GITHUB_REF##*/v}-1.rockspec --api-key ${{ secrets.API_KEY }}"
