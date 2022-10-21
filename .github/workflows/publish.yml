@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@2
 
-      - uses: leafo/gh-actions-lua@8
+      - uses: leafo/gh-actions-lua@d84e7d61946edb679210088bc1378c099fde51fe # tag=v9
 
       - uses: leafo/gh-actions-luarocks@8
 
