@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: InvenTree API
-  version: '326'
+  version: '327'
   description: API for InvenTree - the intuitive open source inventory management
     system
   license:
@@ -102,7 +102,7 @@ paths:
           type: boolean
         description: Is Link
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -377,7 +377,7 @@ paths:
       description: Provides a read-only list of currently failed tasks.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -435,7 +435,7 @@ paths:
       description: Provides a read-only list of currently pending tasks.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -481,7 +481,7 @@ paths:
       description: Provides a read-only list of currently scheduled tasks.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -591,7 +591,7 @@ paths:
       description: List API endpoint for BarcodeScan objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -899,7 +899,7 @@ paths:
         schema:
           type: boolean
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -1275,7 +1275,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -1591,7 +1591,7 @@ paths:
           type: integer
         description: Issued By
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -2288,7 +2288,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -2583,7 +2583,7 @@ paths:
           type: boolean
         description: Consumable
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -2821,7 +2821,7 @@ paths:
         schema:
           type: boolean
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -3075,7 +3075,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -3273,7 +3273,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -3553,7 +3553,7 @@ paths:
           type: boolean
         description: Has Stock
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -3872,7 +3872,7 @@ paths:
         schema:
           type: string
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4178,7 +4178,7 @@ paths:
       description: API endpoint for list view of ManufacturerPartParamater model.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4405,7 +4405,7 @@ paths:
           type: integer
         description: Base Part
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4604,7 +4604,7 @@ paths:
       description: List view for ContentTypes.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4722,7 +4722,7 @@ paths:
       description: List view for DataOutput objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4832,7 +4832,7 @@ paths:
       description: List view for server error messages.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -4997,7 +4997,7 @@ paths:
       description: List view for feature flags.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5138,7 +5138,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5324,7 +5324,7 @@ paths:
       description: List view for available icon packages.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5355,7 +5355,7 @@ paths:
       description: API endpoint for accessing a list of DataImportColumnMap objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5507,7 +5507,7 @@ paths:
         schema:
           type: boolean
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5680,7 +5680,7 @@ paths:
       description: API endpoint for accessing a list of DataImportSession objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -5996,7 +5996,7 @@ paths:
           type: string
         description: Items
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -6307,7 +6307,7 @@ paths:
         schema:
           type: string
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -6776,7 +6776,7 @@ paths:
       description: List view for all news items.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -6940,7 +6940,7 @@ paths:
       description: List view for all notes images.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -7014,7 +7014,7 @@ paths:
         schema:
           type: string
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -7267,7 +7267,7 @@ paths:
           type: boolean
         description: Has Target Date
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -7416,7 +7416,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -7668,7 +7668,7 @@ paths:
           type: boolean
         description: Include Variants
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -8338,7 +8338,7 @@ paths:
           type: boolean
         description: Include Variants
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -8473,7 +8473,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -8719,7 +8719,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -9346,7 +9346,7 @@ paths:
           type: boolean
         description: Include Variants
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -9499,7 +9499,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -9734,7 +9734,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -9986,7 +9986,7 @@ paths:
           type: boolean
         description: Has Pricing
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -10578,7 +10578,7 @@ paths:
           type: boolean
         description: delivered
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -10977,7 +10977,7 @@ paths:
           type: boolean
         description: Is Variant
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -11651,7 +11651,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -11973,7 +11973,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -12198,7 +12198,7 @@ paths:
         for rendering a tree.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -12234,7 +12234,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -12416,7 +12416,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -12679,7 +12679,7 @@ paths:
           type: boolean
         description: Has Units
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -12932,7 +12932,7 @@ paths:
       description: API endpoint for accessing a list of PartRelated objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -13178,7 +13178,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -13360,7 +13360,7 @@ paths:
       description: API endpoint for listing part stocktake information.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -13552,7 +13552,7 @@ paths:
       description: API endpoint for listing part stocktake report information.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -13736,7 +13736,7 @@ paths:
         schema:
           type: string
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -13986,7 +13986,7 @@ paths:
       description: API endpoint for retrieving information on available Part thumbnails.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -14132,11 +14132,16 @@ paths:
           type: boolean
         description: Installed
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
           type: integer
+      - in: query
+        name: mandatory
+        schema:
+          type: boolean
+        description: Mandatory
       - in: query
         name: mixin
         schema:
@@ -14670,7 +14675,7 @@ paths:
         - only accessible by staff users
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -14750,7 +14755,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -14983,7 +14988,7 @@ paths:
       description: API endpoint for listing ReportAsset objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -15178,7 +15183,7 @@ paths:
       description: API endpoint for listing ReportSnippet objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -15357,7 +15362,7 @@ paths:
         schema:
           type: boolean
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -15639,7 +15644,7 @@ paths:
       description: List view for SelectionList objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -15810,7 +15815,7 @@ paths:
           type: integer
         required: true
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -16002,7 +16007,7 @@ paths:
       description: API endpoint for accessing a list of global settings objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -16147,7 +16152,7 @@ paths:
         objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -16288,7 +16293,7 @@ paths:
       description: API endpoint for accessing a list of user settings objects.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -16581,7 +16586,7 @@ paths:
           type: boolean
         description: In production
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -17282,7 +17287,7 @@ paths:
           type: boolean
         description: has_location_type
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -17444,7 +17449,7 @@ paths:
         - POST: Create a StockLocationType
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -17869,7 +17874,7 @@ paths:
         for rendering as a tree.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -17992,7 +17997,7 @@ paths:
           type: boolean
         description: Enabled
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -18276,7 +18281,7 @@ paths:
         schema:
           type: integer
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -18393,7 +18398,7 @@ paths:
       description: Override the GET method to determine export options.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -18571,7 +18576,7 @@ paths:
       description: Return a list of all available units.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -18613,7 +18618,7 @@ paths:
         schema:
           type: boolean
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -18795,7 +18800,7 @@ paths:
       description: List endpoint for all auth groups.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -19064,7 +19069,7 @@ paths:
         Cannot create.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -19237,7 +19242,7 @@ paths:
       description: List of user tokens for current user.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -19369,7 +19374,7 @@ paths:
       description: Simple JSON endpoint for InvenTree version text.
       parameters:
       - name: limit
-        required: true
+        required: false
         in: query
         description: Number of results to return per page.
         schema:
@@ -22178,7 +22183,9 @@ components:
       - available_stock
       - available_substitute_stock
       - available_variant_stock
+      - building
       - can_build
+      - external_stock
       - on_order
       - part
       - pk
@@ -22446,6 +22453,7 @@ components:
       - creation_date
       - issued_by_detail
       - level
+      - overdue
       - part
       - part_detail
       - part_name
@@ -22720,6 +22728,7 @@ components:
           readOnly: true
           title: Build
       required:
+      - allocated
       - allocations
       - allow_variants
       - available_stock
@@ -22731,6 +22740,7 @@ components:
       - build_detail
       - build_reference
       - consumable
+      - external_stock
       - in_production
       - inherited
       - on_order
@@ -23173,6 +23183,7 @@ components:
           description: Default currency used for this company
       required:
       - currency
+      - image
       - name
       - pk
       - thumbnail
@@ -23980,6 +23991,8 @@ components:
           type: integer
           default: 1
           description: Quantity of serial numbers to generate
+      required:
+      - serial
     GenericStateClass:
       type: object
       description: API serializer for generic state class information.
@@ -25138,6 +25151,7 @@ components:
           description: Target model ID for this image
       required:
       - date
+      - image
       - pk
     NotificationMessage:
       type: object
@@ -25258,7 +25272,7 @@ components:
       - value
     NullEnum:
       enum:
-      - nullValue
+      - null
     OutcomeEnum:
       enum:
       - 10
@@ -27150,13 +27164,27 @@ components:
           items:
             type: string
       required:
+      - allocated_to_build_orders
+      - allocated_to_sales_orders
       - barcode_hash
+      - building
       - category_name
+      - external_stock
       - full_name
+      - in_stock
       - name
+      - ordering
       - pk
+      - required_for_build_orders
+      - required_for_sales_orders
+      - revision_count
       - starred
+      - stock_item_count
+      - suppliers
       - thumbnail
+      - total_in_stock
+      - unallocated_stock
+      - variant_stock
     PartBrief:
       type: object
       description: Serializer for Part (brief detail).
@@ -27261,6 +27289,7 @@ components:
       required:
       - barcode_hash
       - full_name
+      - image
       - name
       - pk
       - thumbnail
@@ -27401,6 +27430,7 @@ components:
           description: Selection list for this parameter
       required:
       - name
+      - parts
       - pk
     PartPricing:
       type: object
@@ -27845,6 +27875,7 @@ components:
           readOnly: true
       required:
       - count
+      - image
     PartThumbSerializerUpdate:
       type: object
       description: Serializer for updating Part thumbnail.
@@ -27852,6 +27883,8 @@ components:
         image:
           type: string
           format: uri
+      required:
+      - image
     PatchedAddress:
       type: object
       description: Serializer for the Address Model.
@@ -32264,9 +32297,13 @@ components:
           type: boolean
           description: Return True if this is a 'package' plugin.
           readOnly: true
+        is_mandatory:
+          type: boolean
+          readOnly: true
       required:
       - is_builtin
       - is_installed
+      - is_mandatory
       - is_package
       - is_sample
       - key
@@ -32656,7 +32693,10 @@ components:
           description: Destination for received items
       required:
       - barcode_hash
+      - completed_lines
       - created_by
+      - line_items
+      - overdue
       - pk
       - reference
       - status
@@ -32847,9 +32887,13 @@ components:
           type: string
           readOnly: true
       required:
+      - destination_detail
       - internal_part
       - internal_part_name
+      - ipn
+      - mpn
       - order
+      - overdue
       - part
       - pk
       - quantity
@@ -33236,7 +33280,10 @@ components:
           nullable: true
       required:
       - barcode_hash
+      - completed_lines
       - created_by
+      - line_items
+      - overdue
       - pk
       - reference
       - status
@@ -33700,9 +33747,14 @@ components:
           title: Completed Shipments
       required:
       - barcode_hash
+      - completed_lines
+      - completed_shipments_count
       - created_by
+      - line_items
+      - overdue
       - pk
       - reference
+      - shipments_count
       - status
       - status_text
     SalesOrderAllocation:
@@ -33778,6 +33830,7 @@ components:
       - part
       - pk
       - quantity
+      - serial
       - shipment_detail
     SalesOrderComplete:
       type: object
@@ -33943,10 +33996,13 @@ components:
           format: double
           readOnly: true
       required:
+      - allocated
       - available_stock
       - available_variant_stock
+      - building
       - on_order
       - order
+      - overdue
       - pk
       - quantity
       - shipped
@@ -34028,6 +34084,7 @@ components:
           description: Markdown notes (optional)
           maxLength: 50000
       required:
+      - allocated_items
       - order
       - pk
     SalesOrderShipmentAllocation:
@@ -34765,12 +34822,19 @@ components:
           nullable: true
           title: Location
       required:
+      - allocated
       - barcode_hash
+      - child_items
+      - expired
+      - in_stock
+      - installed_items
       - parent
       - part
       - pk
       - quantity
+      - stale
       - status_text
+      - tracking_items
     StockItemSerializerBrief:
       type: object
       description: Brief serializers for a StockItem.
