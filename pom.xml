@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.w3asel</groupId>
+    <artifactId>inventree-sdk-java</artifactId>
+    <packaging>jar</packaging>
+    <version>0.18.326-SNAPSHOT</version>
+
+    <name>InvenTree SDK (Java)</name>
+    <description>A Java implementation of the OpenAPI spec published by InvenTree.</description>
+    <url>https://github.com/1337joe/inventree-sdk-java</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Joseph Rogers</name>
+            <email>joe@w3asel.com</email>
+            <url>https://www.w3asel.com</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git@github.com:1337joe/inventree-sdk-java.git</connection>
+        <developerConnection>scm:git@github.com:1337joe/inventree-sdk-java.git</developerConnection>
+        <url>https://github.com/1337joe/inventree-sdk-java</url>
+    </scm>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <gson-fire-version>1.9.0</gson-fire-version>
+        <okhttp-version>4.12.0</okhttp-version>
+        <gson-version>2.12.1</gson-version>
+        <commons-lang3-version>3.17.0</commons-lang3-version>
+        <jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
+        <jakarta-annotation-version>1.3.5</jakarta-annotation-version>
+        <beanvalidation-version>2.0.2</beanvalidation-version>
+        <junit-version>5.10.3</junit-version>
+        <junit-platform-runner.version>1.10.0</junit-platform-runner.version>
+        <jakarta.ws.rs-api-version>4.0.0</jakarta.ws.rs-api-version>
+        <jsr311-api-version>1.1.1</jsr311-api-version>
+        <jsr305-version>3.0.2</jsr305-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <junit.version>5.12.1</junit.version>
+        <plugin-replacer.version>1.5.3</plugin-replacer.version>
+        <plugin-openapi-generator.version>7.12.0</plugin-openapi-generator.version>
+        <plugin-javadoc.version>3.11.2</plugin-javadoc.version>
+        <plugin-source.version>3.3.1</plugin-source.version>
+        <plugin-gpg.version>3.2.7</plugin-gpg.version>
+        <plugin-central-publishing.version>0.7.0</plugin-central-publishing.version>
+    </properties>
+
+    <dependencies>
+        <!-- @Nullable annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>${jsr305-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gsonfire</groupId>
+            <artifactId>gson-fire</artifactId>
+            <version>${gson-fire-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
+            <version>${jakarta-annotation-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>${jakarta.ws.rs-api-version}</version>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>${plugin-replacer.version}</version>
+                <executions>
+                    <execution>
+                        <id>fix-schema</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>src/main/resources/api.yaml</file>
+                    <regex>true</regex>
+                    <regexFlags>
+                        <regexFlag>MULTILINE</regexFlag>
+                    </regexFlags>
+                    <replacements>
+                        <!-- null keyword breaks enum builder -->
+                        <replacement>
+                            <token>- null$</token>
+                            <value>- nullValue</value>
+                        </replacement>
+                        <!-- list endpoints require limit fields to return the expected type -->
+                        <replacement>
+                            <token>name: (limit)(\n\s+)required: false</token>
+                            <value>name: $1$2required: true</value>
+                        </replacement>
+                        <!-- misc elements that shouldn't be required -->
+                        <replacement>
+                            <token>^\s+- image$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- tracking_items$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- serial$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- shipments_count$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- completed_shipments_count$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- expired$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- allocated_items$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- installed_items$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- overdue$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- destination_detail$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- stale$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- parts$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- ipn$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- completed_lines$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- child_items$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- mpn$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- line_items$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- unallocated_stock$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- allocated$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- suppliers$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- ordering$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- stock_item_count$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- variant_stock$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- revision_count$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- in_stock$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- building$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- required_for_build_orders$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- total_in_stock$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- required_for_sales_orders$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- allocated_to_sales_orders$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- allocated_to_build_orders$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- external_stock$\n</token>
+                            <value></value>
+                        </replacement>
+                        <!--
+                        <replacement>
+                            <token>^\s+- project_code_detail$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- responsible_detail$\n</token>
+                            <value></value>
+                        </replacement>
+                        <replacement>
+                            <token>^\s+- contact_detail$\n</token>
+                            <value></value>
+                        </replacement>
+                        -->
+                        <!-- remove now-empty required list tags -->
+                        <replacement>
+                            <token>^(\s+)required:\n((?!\1))</token>
+                            <value>$2</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${plugin-openapi-generator.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>com.w3asel</groupId>
+                            <artifactId>inventree-sdk-java</artifactId>
+
+                            <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
+                            <skipIfSpecIsUnchanged>true</skipIfSpecIsUnchanged>
+                            <generatorName>java</generatorName>
+                            <generateModelTests>false</generateModelTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateApiTests>false</generateApiTests>
+                            <generateApiDocumentation>false</generateApiDocumentation>
+                            <configOptions>
+                                <apiPackage>com.w3asel.inventree.api</apiPackage>
+                                <modelPackage>com.w3asel.inventree.model</modelPackage>
+                                <invokerPackage>com.w3asel.inventree.invoker</invokerPackage>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <!-- TODO none of these work -->
+                            <nameMappings>
+                                <nameMapping>null=_null</nameMapping>
+                            </nameMappings>
+                            <parameterNameMappings>
+                                <parameterNameMapping>null=_null</parameterNameMapping>
+                            </parameterNameMappings>
+                            <reservedWordsMappings>
+                                <reservedWordsMapping>null=_null</reservedWordsMapping>
+                            </reservedWordsMappings>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${plugin-javadoc.version}</version>
+                <configuration>
+                    <tags>
+                        <tag>
+                            <name>http.response.details</name>
+                            <placement>a</placement>
+                            <head>HTTP Response Details:</head>
+                        </tag>
+                    </tags>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>publish</id>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>${plugin-javadoc.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>${plugin-source.version}</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${plugin-gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${plugin-central-publishing.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                            <checksums>required</checksums>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
