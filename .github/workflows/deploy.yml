@@ -1,0 +1,54 @@
+name: Deploy Test
+
+on:
+  push:
+    branches:
+      - 'main'
+    paths:
+      - 'src/main/resources/api.yaml'
+      - 'pom.xml'
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag name'
+        required: true
+        type: string
+
+env:
+  TAG_NAME: ${{ inputs.tag }}
+  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # upload to release contents
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set version on release
+        if: github.event_name == 'release'
+        run: |
+          echo "TAG_NAME=$GITHUB_REF" >> "$GITHUB_ENV"
+          
+      - name: Set version manual dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "VERSION=${TAG_NAME##*/v}" >> "$GITHUB_ENV"
+
+      - name: Write version into pom if overridden
+        if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
+        run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##*/v}</version>|}" sample_file.txt
+
+      - name: Attach artifacts to release
+        if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for f in $(find . -name sample_file.txt); do
+            gh release upload ${{ env.TAG_NAME }} $f
+          done
