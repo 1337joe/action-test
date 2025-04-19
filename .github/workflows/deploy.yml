@@ -46,6 +46,8 @@ jobs:
         if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
         run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##*/v}</version>|" sample_file.txt
 
+      - run: cat sample_file.txt
+
       - name: Attach artifacts to release
         if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
         env:
