@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag name'
+        description: 'Tag name, (include initial v)'
         required: true
         type: string
 
@@ -40,9 +40,11 @@ jobs:
         run: |
           echo "VERSION=${TAG_NAME##*/v}" >> "$GITHUB_ENV"
 
+      - run: echo "${TAG_NAME}"
+
       - name: Write version into pom if overridden
         if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
-        run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##*/v}</version>|}" sample_file.txt
+        run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##*/v}</version>|" sample_file.txt
 
       - name: Attach artifacts to release
         if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
