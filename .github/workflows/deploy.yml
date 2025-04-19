@@ -30,18 +30,13 @@ jobs:
       - name: Set version on release
         if: github.event_name == 'release'
         run: |
-          echo "TAG_NAME=$GITHUB_REF" >> "$GITHUB_ENV"
-          
-      - name: Set version manual dispatch
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          echo "VERSION=${TAG_NAME##*/v}" >> "$GITHUB_ENV"
+          echo "TAG_NAME=${GITHUB_REF##*/}" >> "$GITHUB_ENV"
 
       - run: echo "${TAG_NAME}"
 
       - name: Write version into pom if overridden
         if: github.event_name == 'workflow_dispatch' ||  github.event_name == 'release'
-        run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##*/v}</version>|" sample_file.txt
+        run: sed -i "s|<version>.*-SNAPSHOT</version>|<version>${TAG_NAME##v}</version>|" sample_file.txt
 
       - run: cat sample_file.txt
 
